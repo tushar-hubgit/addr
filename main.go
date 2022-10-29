@@ -1,7 +1,6 @@
 package main
 
 import (
-	"addr/functions"
 	"addr/logic"
 	"fmt"
 	"log"
@@ -20,9 +19,7 @@ func main() {
 
 	mux := http.NewServeMux()
 
-	appLogic := logic.AppLogic{
-		AppFunctions: functions.AppFunctions{},
-	}
+	appLogic := logic.AppLogic{}
 
 	mux.HandleFunc("/", appLogic.GetIP)
 

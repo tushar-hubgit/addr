@@ -3,17 +3,16 @@ package logic
 import (
 	"encoding/json"
 	"fmt"
-	"addr/functions"
+	"net"
 	"net/http"
 	"strings"
 )
 
 type AppLogic struct {
-	AppFunctions functions.AppFunctions
 }
 
 func (l *AppLogic) GetIP(w http.ResponseWriter, r *http.Request) {
-	ip := l.AppFunctions.ExtractIP(r.RemoteAddr)
+	ip := net.ParseIP(strings.Split(r.Header.Get("X-Forwarded-For"), ",")[0]).String()
 
 	format := r.URL.Query().Get("format")
 
